@@ -1,11 +1,17 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <ul>
-      <div v-for="nation in nations" :key="nation['ID NATION']">
-        {{ nation.Nation }} - {{ nation.Population }} - {{ nation.Year }}
-      </div>
-    </ul>
+    <OrderList v-model="nations" listStyle="height:auto" dataKey="Year">
+      <template #header> List of Cars </template>
+      <template #item="slotProps">
+        <div>
+          <div>{{ slotProps.item.Nation }}</div>
+          <span
+            >{{ slotProps.item.Year }} - {{ slotProps.item.Population }}</span
+          >
+        </div>
+      </template>
+    </OrderList>
   </div>
 </template>
 
