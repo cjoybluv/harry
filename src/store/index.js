@@ -1,5 +1,7 @@
 import { createStore } from "vuex";
 import axios from "axios";
+import * as auth from "@/store/modules/auth";
+import * as item from "@/store/modules/item";
 
 export default createStore({
   state: {
@@ -29,5 +31,8 @@ export default createStore({
       });
     },
   },
-  modules: {},
+  modules: {
+    auth,
+    item,
+  },
 });

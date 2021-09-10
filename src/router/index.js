@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { demoRoutes } from "./demoRoutes";
 import Home from "../views/Home.vue";
 
-const routes = [
+const mainRoutes = [
   {
     path: "/",
     name: "Home",
@@ -19,7 +20,26 @@ const routes = [
       layout: "demo/DemoLayout",
     },
   },
+  {
+    path: "/login",
+    name: "Login",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/Login.vue"),
+  },
+  {
+    path: "/demo",
+    name: "Demo",
+    component: () => import("@/layouts/demo/Demo.vue"),
+    meta: {
+      layout: "demo/DemoLayout",
+    },
+  },
 ];
+
+const routes = mainRoutes.concat(demoRoutes);
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
