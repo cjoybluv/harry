@@ -10,10 +10,22 @@ export const getters = {
   items(state) {
     return state.items;
   },
-  cascadedItems(state) {
+  itemsMenu(state, getters) {
     return state.items.map((item) => {
-      return { value: item._id, label: item.name };
+      const icon = getters.itemIcon(item.itemType);
+      return {
+        key: item._id,
+        label: item.name,
+        icon: "pi pi-fw " + icon,
+      };
     });
+  },
+  itemIcon: () => (itemType) => {
+    const iconMap = {
+      CHECKLIST: "pi-check",
+      ALARM: "pi-bell",
+    };
+    return iconMap[itemType];
   },
 };
 

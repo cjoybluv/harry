@@ -47,7 +47,8 @@ export default {
       mobileMenuActive: false,
       menu: [
         { label: "Demo", icon: "pi pi-fw pi-id-card", to: "/about" },
-        { label: "Login", icon: "pi pi-fw pi-id-card", to: "/login" },
+        { label: "Items", icon: "pi pi-fw pi-globe", to: "/items" },
+        { label: "Login", icon: "pi pi-fw pi-user", to: "/login" },
       ],
     };
   },
