@@ -1,6 +1,6 @@
 import CodeHighlight from "@/AppCodeHighlight";
 
-// import AppLayout from '@/layouts/AppLayout'
+import AppLayout from "@/layouts/AppLayout";
 
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
@@ -196,5 +196,5 @@ export const registerPrime = (app) => {
   app.use(ConfirmationService);
   app.use(ToastService);
 
-  // app.component('AppLayout', AppLayout)
+  app.component("AppLayout", AppLayout);
 };
