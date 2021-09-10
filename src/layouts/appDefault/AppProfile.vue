@@ -4,7 +4,7 @@
       <img src="../../assets/layout/images/profile-light-bulb.png" alt="" />
     </div>
     <button class="p-link layout-profile-link" @click="onClick">
-      <span class="username">dave@harry.com</span>
+      <span class="username">{{ user.email }}</span>
       <i class="pi pi-fw pi-cog"></i>
     </button>
     <transition name="layout-submenu-wrapper">
@@ -32,11 +32,17 @@
 
 <script>
 import { defineComponent } from "vue";
+import { mapGetters } from "vuex";
 export default defineComponent({
   data() {
     return {
       expanded: false,
     };
+  },
+  computed: {
+    ...mapGetters({
+      user: "auth/user",
+    }),
   },
   methods: {
     onClick(event) {
