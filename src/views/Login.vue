@@ -16,13 +16,15 @@
             v-slot="{ field }"
             class="field"
           >
-            <label for="email">EMail</label>
-            <span class="p-input-icon-right">
-              <InputText
-                :class="{ 'p-invalid': errors.email }"
-                v-bind="field"
-              />
-            </span>
+            <div class="mt-3">
+              <label for="email">EMail</label>
+              <span class="p-input-icon-right">
+                <InputText
+                  :class="{ 'p-invalid': errors.email }"
+                  v-bind="field"
+                />
+              </span>
+            </div>
           </Field>
           <div class="invalid-feedback">{{ errors.email }}</div>
 
@@ -32,25 +34,27 @@
             v-slot="{ field }"
             class="field"
           >
-            <label for="password">Password</label>
-            <span class="p-input-icon-right">
-              <InputText
-                :class="{ 'p-invalid': errors.password }"
-                v-bind="field"
-                :type="passwordType"
-              />
-              <i
-                class="pi"
-                :class="{
-                  'pi-eye-slash': passwordVisible,
-                  'pi-eye': !passwordVisible,
-                }"
-                @click.prevent="
-                  passwordVisible = !passwordVisible;
-                  passwordType = passwordVisible ? 'text' : 'password';
-                "
-              />
-            </span>
+            <div class="mt-3">
+              <label for="password">Password</label>
+              <span class="p-input-icon-right">
+                <InputText
+                  :class="{ 'p-invalid': errors.password }"
+                  v-bind="field"
+                  :type="passwordType"
+                />
+                <i
+                  class="pi"
+                  :class="{
+                    'pi-eye-slash': passwordVisible,
+                    'pi-eye': !passwordVisible,
+                  }"
+                  @click.prevent="
+                    passwordVisible = !passwordVisible;
+                    passwordType = passwordVisible ? 'text' : 'password';
+                  "
+                />
+              </span>
+            </div>
           </Field>
           <div class="invalid-feedback">{{ errors.password }}</div>
 
@@ -121,7 +125,7 @@ export default {
 
       this.login(loginDto)
         .then(() => {
-          this.$router.push("About");
+          this.$router.push("Items");
         })
         .catch((err) => {
           console.log("login-catch", err);
