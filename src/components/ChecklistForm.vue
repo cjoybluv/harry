@@ -47,9 +47,9 @@
 
           <h4>Items - {{ checklistDTO.checklist.items?.length }}</h4>
 
-          <!-- <div v-for="(item, i) in checklistDTO.checklist.items" :key="i">
+          <div v-for="(item, i) in checklistDTO.checklist.items" :key="i">
             <checklist-item-form :item="item" />
-          </div> -->
+          </div>
 
           <div class="mt-2 flex justify-content-end">
             <div class="col-3">
@@ -79,13 +79,13 @@ import { defineComponent } from "vue";
 import { mapActions, mapGetters } from "vuex";
 import { Form, Field } from "vee-validate";
 import { object, string } from "yup";
-// import ChecklistItemForm from "@/components/ChecklistItemForm";
+import ChecklistItemForm from "@/components/ChecklistItemForm";
 
 export default defineComponent({
   name: "ChecklistForm",
   props: ["itemId"],
   components: {
-    // ChecklistItemForm,
+    ChecklistItemForm,
     Form,
     Field,
   },

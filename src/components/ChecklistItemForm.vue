@@ -1,26 +1,32 @@
 <template>
   <div>
-    <Field
-      v-model="formData.completed"
-      name="completed"
-      v-slot="{ field }"
-      class="field"
-    >
-      <div class="field-checkbox mb-0">
-        <Checkbox v-bind="field" v-model="formData.completed" />
-      </div>
-    </Field>
+    <Form @submit="onSubmit" :validation-schema="schema">
+      <Field
+        v-model="formData.completed"
+        name="completed"
+        v-slot="{ field }"
+        class="field"
+      >
+        <div class="field-checkbox mb-0">
+          <Checkbox v-bind="field" v-model="formData.completed" />
+        </div>
+      </Field>
 
-    <Field v-model="formData.name" name="name" v-slot="{ field }" class="field">
-      <div class="field-checkbox mb-0">
-        <InputText
-          v-model="formData.name"
-          @change="updateName"
-          :class="{ 'p-invalid': errors.name }"
-          v-bind="field"
-        />
-      </div>
-    </Field>
+      <Field
+        v-model="formData.name"
+        name="name"
+        v-slot="{ field }"
+        class="field"
+      >
+        <div class="mb-0">
+          <InputText
+            v-model="formData.name"
+            @change="updateName"
+            v-bind="field"
+          />
+        </div>
+      </Field>
+    </Form>
   </div>
 </template>
 
@@ -52,6 +58,13 @@ export default {
       },
     };
   },
+  watch: {
+    item(newVal) {
+      if (newVal !== this.formData) {
+        this.formData = newVal;
+      }
+    },
+  },
   mounted() {
     this.formData = { ...this.item };
   },
@@ -61,6 +74,9 @@ export default {
     },
     updateName(e) {
       console.log("updateName", e);
+    },
+    onSubmit() {
+      console.log("onSubmit");
     },
   },
 };
