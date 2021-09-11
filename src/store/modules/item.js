@@ -17,6 +17,7 @@ export const getters = {
         key: item._id,
         label: item.name,
         icon: "pi pi-fw " + icon,
+        itemType: item.itemType,
       };
     });
   },

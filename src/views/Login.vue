@@ -125,7 +125,7 @@ export default {
 
       this.login(loginDto)
         .then(() => {
-          this.$router.push("Items");
+          this.$router.push("Explorer");
         })
         .catch((err) => {
           console.log("login-catch", err);
