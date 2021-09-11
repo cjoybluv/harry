@@ -1,6 +1,6 @@
 <template>
   <div class="formgrid grid">
-    <div class="col-12 md:col-6">
+    <div class="col-12">
       <div class="card p-fluid">
         <h5>Checklist Form</h5>
 
@@ -45,36 +45,11 @@
           </Field>
           <div class="invalid-feedback">{{ errors.master }}</div>
 
-          <h4>Items</h4>
+          <h4>Items - {{ checklistDTO.checklist.items?.length }}</h4>
 
-          <div v-for="(item, i) in checklistDTO.items" :key="i">
-            <Field
-              v-model="item.completed"
-              name="completed"
-              v-slot="{ field }"
-              class="field"
-            >
-              <div class="field-checkbox mb-0">
-                <Checkbox v-bind="field" v-model="item.completed" />
-              </div>
-            </Field>
-
-            <Field
-              v-model="item.name"
-              name="itemName"
-              v-slot="{ field }"
-              class="field"
-            >
-              <div class="field-checkbox mb-0">
-                <span class="p-input-icon-right">
-                  <InputText
-                    :class="{ 'p-invalid': errors.itemName }"
-                    v-bind="field"
-                  />
-                </span>
-              </div>
-            </Field>
-          </div>
+          <!-- <div v-for="(item, i) in checklistDTO.checklist.items" :key="i">
+            <checklist-item-form :item="item" />
+          </div> -->
 
           <div class="mt-2 flex justify-content-end">
             <div class="col-3">
@@ -101,14 +76,16 @@
 
 <script>
 import { defineComponent } from "vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { Form, Field } from "vee-validate";
 import { object, string } from "yup";
+// import ChecklistItemForm from "@/components/ChecklistItemForm";
 
 export default defineComponent({
   name: "ChecklistForm",
-  props: ["checklist"],
+  props: ["itemId"],
   components: {
+    // ChecklistItemForm,
     Form,
     Field,
   },
@@ -126,9 +103,12 @@ export default defineComponent({
   data() {
     return {
       checklistDTO: {
+        _id: "",
         name: "",
         owner: this.owner,
-        items: [],
+        checklist: {
+          items: [],
+        },
       },
     };
   },
@@ -137,16 +117,29 @@ export default defineComponent({
       owner: "auth/user",
     }),
   },
+  watch: {
+    itemId(newVal) {
+      if (newVal !== this.checklistDTO._id) {
+        this.fetchOne(newVal).then(
+          (result) => (this.checklistDTO = { ...result })
+        );
+      }
+    },
+  },
   mounted() {
-    console.log("mounted", this.checklist);
-    if (this.checklist?.name) {
-      this.checklistDTO = { ...this.checklist };
+    if (this.itemId) {
+      this.fetchOne(this.itemId).then(
+        (result) => (this.checklistDTO = { ...result })
+      );
     }
   },
   methods: {
     onSubmit() {
       console.log("onSubmit", this.checklistDTO);
     },
+    ...mapActions({
+      fetchOne: "item/fetchOne",
+    }),
   },
 });
 </script>

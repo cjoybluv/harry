@@ -67,6 +67,16 @@ export const actions = {
         .catch((err) => console.log(err));
     });
   },
+  fetchOne(_, id) {
+    return new Promise((resolve) => {
+      itemService
+        .getItem(id)
+        .then((response) => {
+          resolve(response.data);
+        })
+        .catch((err) => console.log("fetchOne.catch", err));
+    });
+  },
   save({ commit }, newItem) {
     return new Promise((resolve) => {
       itemService

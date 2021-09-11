@@ -1,33 +1,39 @@
 <template>
-  <div id="items" class="grid">
+  <div id="explorer" class="grid">
     <div class="col-4">
       <AppMenu :model="itemsMenu" />
     </div>
 
-    <div class="col-8">
-      <ChecklistForm />
+    <div id="form-here" class="col-8">
+      <component :is="currentForm" :itemId="itemId"></component>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { mapActions, useStore } from "vuex";
 import AppMenu from "@/layouts/appDefault/AppMenu";
+import AlarmForm from "@/components/AlarmForm.vue";
 import ChecklistForm from "@/components/ChecklistForm";
+import { formMap } from "@/constants/explorerConstants";
 
 export default defineComponent({
-  name: "Items",
+  name: "Explorer",
   components: {
     AppMenu,
+    AlarmForm,
     ChecklistForm,
   },
   setup() {
     const store = useStore();
     store.dispatch("auth/resetUserToken");
 
-    const handleMenuClick = ({ originalEvent, item }) => {
-      console.log("handleMenuClick", item, originalEvent);
+    let currentForm = ref(null);
+    let itemId = ref(null);
+    const handleMenuClick = ({ item: menuItem }) => {
+      currentForm.value = formMap[menuItem.itemType];
+      itemId.value = menuItem.key;
     };
 
     const itemsMenu = computed(() => {
@@ -40,7 +46,7 @@ export default defineComponent({
       });
     });
 
-    return { itemsMenu };
+    return { itemsMenu, currentForm, itemId };
   },
   mounted() {
     this.fetchAll();
@@ -54,7 +60,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-#item {
+#explorer {
   .layout-menu {
     border-right: solid 1px var(--blue-100);
   }
