@@ -21,10 +21,10 @@ const mainRoutes = [
     },
   },
   {
-    path: "/items",
-    name: "Items",
+    path: "/explorer",
+    name: "Explorer",
     component: () =>
-      import(/* webpackChunkName: "items" */ "../views/Items.vue"),
+      import(/* webpackChunkName: "explorer" */ "../views/Explorer.vue"),
   },
   {
     path: "/login",

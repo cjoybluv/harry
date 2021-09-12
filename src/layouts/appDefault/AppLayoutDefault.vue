@@ -36,7 +36,7 @@ import AppTopBar from "./AppTopbar.vue";
 import AppProfile from "./AppProfile.vue";
 import AppMenu from "./AppMenu.vue";
 import AppFooter from "./AppFooter.vue";
-
+import { mainMenu } from "@/constants/appConstants";
 export default {
   data() {
     return {
@@ -45,11 +45,7 @@ export default {
       staticMenuInactive: false,
       overlayMenuActive: false,
       mobileMenuActive: false,
-      menu: [
-        { label: "Demo", icon: "pi pi-fw pi-id-card", to: "/about" },
-        { label: "Items", icon: "pi pi-fw pi-globe", to: "/items" },
-        { label: "Login", icon: "pi pi-fw pi-user", to: "/login" },
-      ],
+      menu: mainMenu,
     };
   },
   watch: {

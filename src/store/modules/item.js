@@ -17,6 +17,7 @@ export const getters = {
         key: item._id,
         label: item.name,
         icon: "pi pi-fw " + icon,
+        itemType: item.itemType,
       };
     });
   },
@@ -64,6 +65,16 @@ export const actions = {
           resolve(response.data);
         })
         .catch((err) => console.log(err));
+    });
+  },
+  fetchOne(_, id) {
+    return new Promise((resolve) => {
+      itemService
+        .getItem(id)
+        .then((response) => {
+          resolve(response.data);
+        })
+        .catch((err) => console.log("fetchOne.catch", err));
     });
   },
   save({ commit }, newItem) {
