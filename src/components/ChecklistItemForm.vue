@@ -31,13 +31,14 @@
 </template>
 
 <script>
-import { Field } from "vee-validate";
+import { Field, Form } from "vee-validate";
 import { object, string } from "yup";
 export default {
   name: "ChecklistItemForm",
   props: ["item"],
   components: {
     Field,
+    Form,
   },
   setup() {
     const schema = object().shape({
